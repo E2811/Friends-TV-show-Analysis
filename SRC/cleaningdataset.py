@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import SRC.function as f
+import functions as f
 
 ########################### FRIENDS DATABASE ###############################
 def clean_dataset():
@@ -20,18 +20,9 @@ def clean_dataset():
         df = df[(df[col].apply(f.nonNull))]
 
     df = df[(df['character'].apply(f.mainCharacters))]
-    df.to_csv('Output/Friends.csv')
+    df.to_csv('OUTPUT/Friends.csv')
 
-    # Create dataframe with number of lines per episode in each season of each main character 
-    lines_episode = {}
-    for i in range(1,11):
-        lines_episode[f'season{i}'] = f.nlines_episode(df,i)
-    lines_episode_df = pd.DataFrame(lines_episode)
-
-    # Total lines per character each episode / all seasons
-    df[col]= df[col].fillna("0")
-    f.total_lines(lines_episode_df,'Total',list(lines_episode_df.columns))
-
-    # Total lines per character
-    lines_episode_df.groupby(['character']).agg({'Total':'sum'}).plot.bar()
+    return df 
     
+
+clean_dataset()
