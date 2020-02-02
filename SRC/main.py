@@ -10,15 +10,20 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Define args
-def recieve_args():
-    parser = argparse.ArgumentParser(description="I")
-    parser.add_argument('-           
+
+def reciebe_args():
+    parser = argparse.ArgumentParser(description='Evaluate Friends TV show')
+    parser.add_argument('--character',
+                        choices = ['Phoebe','Joey','Monica','Rachel','Ross','Chandler']      
+                        default= 'Joey'   
+                        )  
     parser.add_argument('-
-    args = parser.parse_args()
-    return args
+    return parser.parse_args()
 
 def main():
-
+    config = recibe_args()
+    mypdf = pdf.FPDF()
+    pdf.createPdf(mypdf)
 
 
 if __name__=="__main__":
