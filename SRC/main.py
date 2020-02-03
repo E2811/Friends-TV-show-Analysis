@@ -5,9 +5,9 @@ import functions as f
 import graphs as G
 import imageandquotescraping as I
 from fpdf import FPDF
-#from pandas.plotting import table
 import matplotlib.pyplot as plt
 import pandas as pd
+import sendemail as E
 
 # Define args
 
@@ -31,8 +31,8 @@ def recibe_args():
     parser.add_argument('--Rachel',       
                         help = 'Evaluate Rachel of Friends TV show'
                         )
-    parser.add_argument('--Report', 
-                        help = 'Obtain a complete report of Friends TV show')
+    parser.add_argument('--mailto', 
+                        help = 'Obtain an email with the report of Friends TV show')
     return parser.parse_args()
 
 def main():
@@ -53,8 +53,7 @@ def main():
         f.addImagesPdf(pdf,"OUTPUT/ross.jpg",quotes[' Ross'],'Ross')
     elif config.Chandler :
         f.addImagesPdf(pdf,"OUTPUT/Chandler.jpg",quotes[' Chandler'],'Chandler')
-
-    if config.Report:
+    else:
         pdf.image('OUTPUT/lines_episode.png', x = 30 ,y=50, w= 150)
         pdf.ln(160)
         pdf.cell(170, 20,txt="Rachel is the most talkative one", align= 'C' )
@@ -65,9 +64,15 @@ def main():
         pdf.add_page()
         pdf.image('OUTPUT/mean_words.png', x = 20 , y = 30,w = 150)
         pdf.cell(170, 20,txt="Phoebe says more words per line", align= 'C' )
+        pdf.ln(150)
+        pdf.image('OUTPUT/Rating.png', x = 20 , y = 130,w = 150)
 
     print('Pdf report with results saved in the Output folder')
     f.save(pdf)
+
+    if config.mailto:
+        E.sendEmail(config.mailto)
+        print('Sending Email')
 
 
 if __name__=="__main__":
