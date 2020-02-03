@@ -30,5 +30,5 @@ It is the principal code of the program.
 ## OUTPUT folder
 Include the filtered CSV, the obtained graphs, main character's images and the PDF. 
 
-The program can recieve different arguments. Depending on the character name it receives, it generates a PDF with the quote, image and graph corresponding with the selected character. If nothing is selected, the PDF include all the report. 
+The program can recibe different arguments. Depending on the character name it receives, it generates a PDF with the quote, image and graph corresponding with the selected character. If nothing is selected, the PDF include all the report. 
 Finally there is an option which allows to send an email with the PDF. 
