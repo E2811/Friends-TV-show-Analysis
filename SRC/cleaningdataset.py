@@ -23,6 +23,3 @@ def clean_dataset():
     df.to_csv('OUTPUT/Friends.csv')
 
     return df 
-    
-
-clean_dataset()
