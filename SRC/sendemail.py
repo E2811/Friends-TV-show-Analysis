@@ -3,22 +3,22 @@ from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import getpass
 
-def SendEmail(receiver_email='elisammontalvo28@gmail.com'):
+def SendEmail(receiver_email):
     subject = "Friends TV show report"
     body = "This is an email with attachment of a PDF Friends report"
     sender_email = "ironhackeli@gmail.com"
-    password = input("Type your password and press enter:")
-
-    # Add body to email
-    message.attach(MIMEText(body, "plain"))
+    password = getpass.getpass("Type your password and press enter:")
 
     # Creating message.
-    message = MIMEMultipart('alternative')
+    message = MIMEMultipart()
     message['Subject'] = subject
     message['From'] = sender_email
     message['To'] = receiver_email
-
+    # Add body to email
+    message.attach(MIMEText(body, "plain"))
+    filename = "OUTPUT/FriendsTV.pdf"
     # Open PDF file 
     with open("OUTPUT/FriendsTV.pdf", "rb") as attachment:
         # Add file aenas application/octet-stream
@@ -27,6 +27,10 @@ def SendEmail(receiver_email='elisammontalvo28@gmail.com'):
         part.set_payload(attachment.read())
 
     encoders.encode_base64(part)
+    encoders.encode_base64(part)
+    part.add_header(
+    "Content-Disposition",
+    f"attachment; filename= {filename}",)
 
     # Add attachment to message and convert message to string
     message.attach(part)
@@ -35,3 +39,4 @@ def SendEmail(receiver_email='elisammontalvo28@gmail.com'):
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, text)
+    print('Email sent!')

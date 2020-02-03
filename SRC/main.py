@@ -13,26 +13,13 @@ import sendemail as E
 
 def recibe_args():
     parser = argparse.ArgumentParser(description='Evaluate Friends TV show')
-    parser.add_argument('--Phoebe',       
-                        help = 'Evaluate Phoebe of Friends TV show'
-                        ) 
-    parser.add_argument('--Joey',       
-                        help = 'Evaluate Joey of Friends TV show'
-                        )  
-    parser.add_argument('--Monica',       
-                        help = 'Evaluate Monica of Friends TV show'
-                        )  
-    parser.add_argument('--Chandler',       
-                        help = 'Evaluate Chandler of Friends TV show'
-                        )  
-    parser.add_argument('--Ross',       
-                        help = 'Evaluate Ross of Friends TV show'
-                        )  
-    parser.add_argument('--Rachel',       
-                        help = 'Evaluate Rachel of Friends TV show'
-                        )
-    parser.add_argument('--mailto', 
-                        help = 'Obtain an email with the report of Friends TV show')
+    parser.add_argument('--Phoebe', help = 'Evaluate Phoebe of Friends TV show', action='store_true') 
+    parser.add_argument('--Joey',  help = 'Evaluate Joey of Friends TV show', action='store_true')
+    parser.add_argument('--Monica', help = 'Evaluate Monica of Friends TV show', action='store_true')
+    parser.add_argument('--Chandler',  help = 'Evaluate Chandler of Friends TV show' , action='store_true') 
+    parser.add_argument('--Ross',   help = 'Evaluate Ross of Friends TV show' , action='store_true')
+    parser.add_argument('--Rachel',  help = 'Evaluate Rachel of Friends TV show', action='store_true')
+    parser.add_argument('--mailto',  default="elisammontalvo28@gmail.com", type=str ,help = 'Obtain an email with the report of Friends TV show to the email you provide')
     return parser.parse_args()
 
 def main():
@@ -71,7 +58,7 @@ def main():
     f.save(pdf)
 
     if config.mailto:
-        E.sendEmail(config.mailto)
+        E.SendEmail(config.mailto)
         print('Sending Email')
 
 
